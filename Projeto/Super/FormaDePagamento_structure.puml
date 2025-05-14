@@ -1,0 +1,351 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "Projeto.Super.FormaDePagamento",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1355343107 { 
+   	label=Projeto
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   CartaoCredito1355343107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CartaoCredito</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   CVV: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   limite: Double [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Cliente1355343107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Cliente</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   pagamentos: ArrayList&lt;FormaDePagamento&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ setPagamentos(pagamento: FormaDePagamento): FormaDePagamento</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Dinheiro1355343107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Dinheiro</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Motorista1355343107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Motorista</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   emViagem: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   validado: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   veiculo: Veiculo [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Pix1355343107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Pix</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   chavePix: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_305864105 { 
+   	label=gerenciadores
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   GerenciarCliente705003692[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GerenciarCliente</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   rCliente: IRepositorioCliente [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rPagamentos: IRepositorioPagamento [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ adicionarPagamento(cpf: String, pagamento: FormaDePagamento)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ atualizarCliente(clienteNovo: Cliente)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarCliente(cpf: String): Cliente</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cadastrarCliente(nome: String, cpf: String, formaDePagmento: FormaDePagamento, votos: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ list(cpf: String): List&lt;FormaDePagamento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listar(): List&lt;Cliente&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removerCliente(cpf: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3732 { 
+   	label=ui
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Fachada38998879[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Fachada</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   GereCliente: GerenciarCliente [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   GereMotorista: GerenciarMotorista [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gerenciarLocal: GerenciarLocal [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gerenciarVeiculos: GerenciarVeiculos [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gerenciarViagem: GerenciarViagem [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ adicionarPagamento(cpf: String, pagamento: FormaDePagamento)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ atualizarCliente(cliente: Cliente)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ atualizarMotorista(motorista: Motorista)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarCliente(cpf: String): Cliente</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarMotorista(cpf: String): Motorista</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cadastrarCidade(nome: String, cep: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cadastrarCliente(nome: String, cpf: String, formaDePagamento: FormaDePagamento)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cadastrarMotorista(nome: String, cpf: String, validado: boolean, emViagem: boolean, veiculo: Veiculo)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cadastrarViagem(m: Motorista, c: Cliente, origem: String, destino: String, pacote: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarCidades(): Map&lt;String, String&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarCliente(): List&lt;Cliente&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarMotoristas(): List&lt;Motorista&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarPagamentos(cpf: String): List&lt;FormaDePagamento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarViagemC(cpf: String): List&lt;Viagem&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarViagemMotorista(cpf: String): List&lt;Viagem&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removerCliente(cpf: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removerMotorista(cpf: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ verificarCidade(nome: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ viajarMotorista(m: Motorista)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_80248667 { 
+   	label=Super
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   FormaDePagamento2143503024[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FormaDePagamento</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   tipo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   valido: boolean [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Pessoa2143503024[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Pessoa</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cpf: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   estrelas: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nome: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   votos: int [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Viagem2143503024[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Viagem</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cliente: Cliente [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   destino: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fachada: Fachada [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   motorista: Motorista [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   origem: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   pacote: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_929868429 { 
+   	label=Arquivo
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   RepositorioClienteArquivo557585246[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RepositorioClienteArquivo</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   arquivo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   clientes: List&lt;Cliente&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Atualizar(cliente: Cliente)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ adicionar(cliente: Cliente)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarPorCpf(cpf: String): Cliente</TD></TR>
+<TR><TD ALIGN="LEFT" >- carregar(): List&lt;Cliente&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ list(cpf: String): List&lt;FormaDePagamento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listar(): List&lt;Cliente&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removerCliente(cpf: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ salvar()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RepositorioMotoristaArquivo557585246[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RepositorioMotoristaArquivo</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   arquivo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   motoristas: List&lt;Motorista&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Atualizar(motorista: Motorista)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ adicionar(motorista: Motorista)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarPorCpf(cpf: String): Motorista</TD></TR>
+<TR><TD ALIGN="LEFT" >+ carregar(): List&lt;Motorista&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listar(): List&lt;Motorista&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removerMotorista(cpf: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ salvar()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Cliente1355343107 -> FormaDePagamento2143503024[label="pagamentos
+[0..*]"];
+Fachada38998879 -> GerenciarCliente705003692[label="GereCliente
+[0..1]"];
+FormaDePagamento2143503024 -> CartaoCredito1355343107[arrowhead=none, arrowtail=empty, dir=both];
+FormaDePagamento2143503024 -> Dinheiro1355343107[arrowhead=none, arrowtail=empty, dir=both];
+FormaDePagamento2143503024 -> Pix1355343107[arrowhead=none, arrowtail=empty, dir=both];
+GerenciarCliente705003692 -> RepositorioClienteArquivo557585246[label="rCliente
+[0..1]", arrowhead=none];
+Pessoa2143503024 -> Cliente1355343107[arrowhead=none, arrowtail=empty, dir=both];
+Pessoa2143503024 -> Motorista1355343107[arrowhead=none, arrowtail=empty, dir=both];
+RepositorioClienteArquivo557585246 -> Cliente1355343107[label="clientes
+[0..*]"];
+RepositorioMotoristaArquivo557585246 -> Motorista1355343107[label="motoristas
+[0..*]"];
+Viagem2143503024 -> Cliente1355343107[label="cliente
+[0..1]"];
+Viagem2143503024 -> Motorista1355343107[label="motorista
+[0..1]"];
+    
+}
+@enduml
